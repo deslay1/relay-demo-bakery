@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rosa's Bakery</title>
+<style>
+  :root{--rose:#c2410c;--cream:#fffaf3;--ink:#3a2a20}
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.6 Georgia,serif;color:var(--ink);background:var(--cream)}
+  header{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;border-bottom:1px solid #efe3d6}
+  .logo{font:700 22px Georgia,serif;color:var(--rose)}
+  nav a{margin-left:22px;color:var(--ink);text-decoration:none;font-size:15px}
+  .hero{text-align:center;padding:72px 24px 64px;background:linear-gradient(#fff6ec,#fffaf3)}
+  .hero h1{font-size:46px;margin:0 0 14px;color:var(--rose)}
+  .hero p{font-size:19px;max-width:560px;margin:0 auto 28px;color:#6b5848}
+  .cta{display:inline-block;background:var(--rose);color:#fff;padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:700}
+  section{max-width:960px;margin:0 auto;padding:56px 24px}
+  h2{font-size:30px;color:var(--rose);text-align:center;margin:0 0 36px}
+  .menu{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .item{background:#fff;border:1px solid #efe3d6;border-radius:14px;padding:22px;text-align:center}
+  .item .emoji{font-size:40px}
+  .item h3{margin:10px 0 6px;font-size:20px}
+  .item .price{color:var(--rose);font-weight:700;margin-top:8px}
+  .about{display:flex;gap:36px;align-items:center}
+  .about .pic{flex:0 0 220px;height:220px;border-radius:16px;background:#f3d9c2 url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=440') center/cover}
+  footer{background:#3a2a20;color:#e9dccc;text-align:center;padding:34px 24px;font-size:14px}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Rosa's Bakery</div>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#visit">Visit</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Fresh from the oven, every morning</h1>
+    <p>Small-batch sourdough, butter croissants, and cakes baked by hand in the heart of town since 2014.</p>
+    <a class="cta" href="#menu">See today's menu</a>
+  </div>
+
+  <section id="menu">
+    <h2>Today's Menu</h2>
+    <div class="menu">
+      <div class="item"><div class="emoji">🥐</div><h3>Butter Croissant</h3><p>Flaky, 36-hour laminated dough.</p><div class="price">$3.50</div></div>
+      <div class="item"><div class="emoji">🍞</div><h3>Sourdough Loaf</h3><p>Naturally leavened, crackly crust.</p><div class="price">$7.00</div></div>
+      <div class="item"><div class="emoji">🧁</div><h3>Vanilla Cupcake</h3><p>Madagascar vanilla, silky frosting.</p><div class="price">$4.00</div></div>
+      <div class="item"><div class="emoji">🥖</div><h3>Baguette</h3><p>Crisp outside, airy inside.</p><div class="price">$4.50</div></div>
+      <div class="item"><div class="emoji">🍪</div><h3>Choc-Chip Cookie</h3><p>Brown butter, sea salt.</p><div class="price">$2.50</div></div>
+      <div class="item"><div class="emoji">🎂</div><h3>Celebration Cake</h3><p>Made to order for any occasion.</p><div class="price">$38.00</div></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>Our Story</h2>
+    <div class="about">
+      <div class="pic"></div>
+      <p>Rosa started baking in her grandmother's kitchen and never stopped. Ten years on, the bakery still runs on the same recipes, the same early mornings, and the same belief that good bread brings people together. Every loaf is shaped by hand and baked the same day you buy it.</p>
+    </div>
+  </section>
+
+  <section id="visit">
+    <h2>Come Visit</h2>
+    <p style="text-align:center;font-size:18px">42 Maple Street · Open Tue–Sun, 7am–4pm<br>Closed Mondays so we can rest our arms.</p>
+  </section>
+
+  <footer>
+    © 2026 Rosa's Bakery · Made with flour and love
+  </footer>
+
+  <!-- Relay widget: this is the one line a developer drops onto a site they ship -->
+  <script src="http://localhost:4000/widget.js" data-project="rosas-bakery"></script>
+</body>
+</html>
