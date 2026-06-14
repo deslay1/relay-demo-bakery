@@ -17,6 +17,9 @@
   .cta{display:inline-block;background:var(--rose);color:#fff;padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:700}
   section{max-width:960px;margin:0 auto;padding:56px 24px}
   h2{font-size:30px;color:var(--rose);text-align:center;margin:0 0 36px}
+  .days{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:0 0 28px}
+  .day{font:600 15px Georgia,serif;color:var(--rose);background:#fff;border:1px solid #efe3d6;border-radius:999px;padding:8px 18px;cursor:pointer}
+  .day[aria-selected="true"]{background:var(--rose);color:#fff;border-color:var(--rose)}
   .menu{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .item{background:#fff;border:1px solid #efe3d6;border-radius:14px;padding:22px;text-align:center}
   .item .emoji{font-size:40px}
@@ -44,16 +47,54 @@
   </div>
 
   <section id="menu">
-    <h2>Today's Menu</h2>
-    <div class="menu">
-      <div class="item"><div class="emoji">🥐</div><h3>Butter Croissant</h3><p>Flaky, 36-hour laminated dough.</p><div class="price">$2.99</div></div>
-      <div class="item"><div class="emoji">🍞</div><h3>Sourdough Loaf</h3><p>Naturally leavened, crackly crust.</p><div class="price">$6.50</div></div>
-      <div class="item"><div class="emoji">🧁</div><h3>Vanilla Cupcake</h3><p>Madagascar vanilla, silky frosting.</p><div class="price">$3.50</div></div>
-      <div class="item"><div class="emoji">🥖</div><h3>Baguette</h3><p>Crisp outside, airy inside.</p><div class="price">$4.50</div></div>
-      <div class="item"><div class="emoji">🍪</div><h3>Choc-Chip Cookie</h3><p>Brown butter, sea salt.</p><div class="price">$2.50</div></div>
-      <div class="item"><div class="emoji">🎂</div><h3>Celebration Cake</h3><p>Made to order for any occasion.</p><div class="price">$38.00</div></div>
-    </div>
+    <h2>This Week's Menu</h2>
+    <div class="days" id="days" role="tablist" aria-label="Menu by day"></div>
+    <div class="menu" id="menu-grid"></div>
   </section>
+
+  <script>
+    // Daily menus, Monday through Friday. Each day reuses staples plus a rotating special.
+    const CROISSANT = {e:'🥐',n:'Butter Croissant',d:'Flaky, 36-hour laminated dough.',p:'$2.99'};
+    const SOURDOUGH = {e:'🍞',n:'Sourdough Loaf',d:'Naturally leavened, crackly crust.',p:'$6.50'};
+    const CUPCAKE   = {e:'🧁',n:'Vanilla Cupcake',d:'Madagascar vanilla, silky frosting.',p:'$3.50'};
+    const BAGUETTE  = {e:'🥖',n:'Baguette',d:'Crisp outside, airy inside.',p:'$4.50'};
+    const COOKIE    = {e:'🍪',n:'Choc-Chip Cookie',d:'Brown butter, sea salt.',p:'$2.50'};
+    const CAKE      = {e:'🎂',n:'Celebration Cake',d:'Made to order for any occasion.',p:'$38.00'};
+
+    const WEEK = [
+      {day:'Monday',    items:[CROISSANT, SOURDOUGH, COOKIE,
+        {e:'🥯',n:'Sesame Bagel',d:'Boiled then baked, chewy crust.',p:'$2.75'}]},
+      {day:'Tuesday',   items:[CROISSANT, BAGUETTE, CUPCAKE,
+        {e:'🍫',n:'Pain au Chocolat',d:'Two batons of dark chocolate.',p:'$3.25'}]},
+      {day:'Wednesday', items:[SOURDOUGH, BAGUETTE, COOKIE,
+        {e:'🫓',n:'Rosemary Focaccia',d:'Olive oil, flaky salt, herbs.',p:'$5.00'}]},
+      {day:'Thursday',  items:[CROISSANT, SOURDOUGH, CUPCAKE,
+        {e:'🥨',n:'Soft Pretzel',d:'Hand-twisted, butter brushed.',p:'$3.00'}]},
+      {day:'Friday',    items:[CROISSANT, BAGUETTE, COOKIE, CUPCAKE, CAKE,
+        {e:'🍩',n:'Glazed Doughnut',d:'Friday-only, vanilla glaze.',p:'$2.25'}]},
+    ];
+
+    const daysEl = document.getElementById('days');
+    const gridEl = document.getElementById('menu-grid');
+
+    function render(i){
+      WEEK.forEach((w,idx)=>daysEl.children[idx].setAttribute('aria-selected', idx===i));
+      gridEl.innerHTML = WEEK[i].items.map(it=>
+        `<div class="item"><div class="emoji">${it.e}</div><h3>${it.n}</h3><p>${it.d}</p><div class="price">${it.p}</div></div>`
+      ).join('');
+    }
+
+    WEEK.forEach((w,i)=>{
+      const b=document.createElement('button');
+      b.className='day'; b.textContent=w.day; b.setAttribute('role','tab');
+      b.onclick=()=>render(i);
+      daysEl.appendChild(b);
+    });
+
+    // Default to today if it's a weekday, otherwise Monday.
+    const dow = new Date().getDay(); // 0=Sun..6=Sat
+    render(dow>=1 && dow<=5 ? dow-1 : 0);
+  </script>
 
   <section id="about">
     <h2>Our Story</h2>
